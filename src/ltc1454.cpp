@@ -1,6 +1,6 @@
 #include "LTC1454.hpp"
 
-LTC1454::LTC1454(uint8_t cs_pin, uint8_t clr_pin)
+LTC1454::LTC1454(uint8_t cs_pin, uint8_t clr_pin = 0U)
     : m_csPin(cs_pin), 
     m_clrPin(clr_pin),
     m_initialized(false),
