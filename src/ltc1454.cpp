@@ -17,7 +17,7 @@ LTC1454::~LTC1454()
     if (m_initialized) SPI.end();
 }
 
-void LTC1454::init(float vref, uint8_t gain)
+void LTC1454::init(float vref = 2.048f, uint8_t gain = 2u)
 {
     if (!m_initialized)
     {
@@ -83,15 +83,15 @@ uint16_t LTC1454::get(Channel channel) const
 
 void LTC1454::set(uint16_t set_all_value)
 {
-    m_txBuffer.tx_dacB = LIMIT(set_all_value, 0, Fullscale);
-    m_txBuffer.tx_dacA = LIMIT(set_all_value, 0, Fullscale);
+    m_txBuffer.tx_dacB = constrain(set_all_value, 0, Fullscale);
+    m_txBuffer.tx_dacA = constrain(set_all_value, 0, Fullscale);
 }
 
 void LTC1454::set(Channel channel, uint16_t set_value)
 {
     switch (channel)
     {
-        case Channel::DAC_A: m_txBuffer.tx_dacA = LIMIT(set_value, 0, Fullscale); break;
-        case Channel::DAC_B: m_txBuffer.tx_dacB = LIMIT(set_value, 0, Fullscale); break;
+        case Channel::DAC_A: m_txBuffer.tx_dacA = constrain(set_value, 0, Fullscale); break;
+        case Channel::DAC_B: m_txBuffer.tx_dacB = constrain(set_value, 0, Fullscale); break;
     }
 }

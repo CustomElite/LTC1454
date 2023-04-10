@@ -23,14 +23,12 @@ BXX :: DAC B (12) Data Bits
 #include <Arduino.h>
 #include <SPI.h>
 
-#define LIMIT(val, min, max)   (val < min) ? min : (val > max) ? max : val
-
 class LTC1454 
 {
 public:
     enum class Channel
     {
-        DAC_A = 0U,
+        DAC_A = 0u,
         DAC_B
     };
 
@@ -69,7 +67,7 @@ public:
     // Converts a analog voltage(float) to a digital value(uint16_t)
     inline uint16_t toCode(float voltage) const
     {
-        return (uint16_t)((voltage / ((m_vRef / (Fullscale + 1)) * m_gain)) + 0.5F);
+        return (uint16_t)((voltage / ((m_vRef / (Fullscale + 1)) * m_gain)) + 0.5f);
     }
 
     inline void setClockFreq(uint32_t clk_freq)
@@ -79,12 +77,12 @@ public:
 
     inline void setVRef(float vref)
     {
-        m_vRef = LIMIT(vref, 0.0f, 2.7f);
+        m_vRef = constrain(vref, 0.0f, 2.7f);
     }
 
     inline void setGain(uint8_t gain)
     {
-        m_gain = LIMIT(gain, 1u, 2u);
+        m_gain = constrain(gain, 1u, 2u);
     }
 
 private:
