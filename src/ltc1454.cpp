@@ -1,6 +1,6 @@
 #include "LTC1454.hpp"
 
-LTC1454::LTC1454(uint8_t cs_pin, uint8_t clr_pin = 0U)
+LTC1454::LTC1454(uint8_t cs_pin, uint8_t clr_pin)
     : m_csPin(cs_pin), 
     m_clrPin(clr_pin),
     m_initialized(false),
@@ -17,7 +17,7 @@ LTC1454::~LTC1454()
     if (m_initialized) SPI.end();
 }
 
-void LTC1454::init(float vref = 2.048f, uint8_t gain = 2u)
+void LTC1454::init(float vref, uint8_t gain)
 {
     if (!m_initialized)
     {
